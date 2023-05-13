@@ -1,22 +1,33 @@
 {
-  "name": "React Replit Extension Starter",
-  "description": "A starter template for a Replit Extension built with React",
+  "name": "Boards",
+  "description": "A kanban board for your repl",
   "version": "0",
-  "tags": [""],
-  "icon": "",
-  "supportEmail": "",
-  "website": "",
-  "longDescription": "",
-  "coverImages": [
+  "tools": [
+
     {
-      "url": "",
-      "label": ""
+      name: "Boards",
+      icon: "/favicon.svg",
+      handler: "/"
     }
+
   ],
-  "fileHandlers": [
+  icon: "/ReplBoardsListing.png",
+  coverImages: [
+
     {
-      "glob": "",
-      "handler": ""
+      path: "/ReplBoardsCoverPhoto.png",
+      label: "preview of extension"
     }
-  ]
+
+  ],
+  scopes: [{
+    name: "read",
+    reason: "Reads the board data"
+  },{
+    name: "write-exec",
+    reason: "Writes to the board data"
+  }],
+  fileHandlers: [],
+  longDescription: "\"Repl Boards\" is a simple extension that adds a task board right into your repl. This extension makes it easy to see what coding tasks you have, where they're at, and what's next. It's a visual way to keep your projects organized and to track your progress. With this tool, you can avoid confusion and forgetfulness, keeping everything clear and in one place.",
+  // For more info: https://docs.replit.com/extensions/api/manifest
 }

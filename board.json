@@ -1,0 +1,66 @@
+{
+  "columns": [
+    {
+      "title": "Backlog",
+      "cards": [
+        {
+          "title": "Clean up loading/error states",
+          "description": "",
+          "id": "08f68f07-a57a-4c59-b5e9-5c48955595bf"
+        },
+        {
+          "title": "Add a support footer",
+          "description": "Add a footer with links to my twitter and repl for support.",
+          "id": "5a2268c1-2a94-4451-bd1f-4c4f1e7006e8"
+        },
+        {
+          "title": "Use correct file saving",
+          "description": "",
+          "id": "5491fba7-2e20-45b1-a5a5-f7f8b7889e42"
+        },
+        {
+          "title": "Fix long inputs",
+          "description": "Enable multiline inputs for creating cards.",
+          "id": "c6567d89-36dc-4aee-95e6-6972f7928402"
+        }
+      ],
+      "id": "6c3d7df2-cb93-43f5-aad3-ad83596af889"
+    },
+    {
+      "title": "To Do",
+      "cards": [],
+      "id": "55106cd5-2b5b-42db-860f-6fc3dff796ec"
+    },
+    {
+      "title": "Doing",
+      "cards": [],
+      "id": "9df07a38-3d46-4b7e-9bbe-84c4b1a3f913"
+    },
+    {
+      "title": "Done",
+      "cards": [
+        {
+          "title": "Create an svg logo",
+          "description": "",
+          "id": "f9accb93-1243-4678-baf3-3b818c57ec89"
+        },
+        {
+          "title": "Ensure all copy is correct",
+          "description": "",
+          "id": "013297f6-6d35-4829-8fcc-2124c2a06a1f"
+        },
+        {
+          "title": "Fix save bug",
+          "description": "Ensure that replit.fs.writeFile always saves the current state of the board.",
+          "id": "72aad85a-756d-430e-9bab-c73f7aeb6d45"
+        },
+        {
+          "title": "Create a good default board",
+          "description": "",
+          "id": "7f8da7eb-e971-44fa-944f-95cc1a502e02"
+        }
+      ],
+      "id": "64f8d629-d752-45f6-842e-49267c63b9fc"
+    }
+  ]
+}

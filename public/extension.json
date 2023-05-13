@@ -1,0 +1,22 @@
+{
+  "name": "React Replit Extension Starter",
+  "description": "A starter template for a Replit Extension built with React",
+  "version": "0",
+  "tags": [""],
+  "icon": "",
+  "supportEmail": "",
+  "website": "",
+  "longDescription": "",
+  "coverImages": [
+    {
+      "url": "",
+      "label": ""
+    }
+  ],
+  "fileHandlers": [
+    {
+      "glob": "",
+      "handler": ""
+    }
+  ]
+}

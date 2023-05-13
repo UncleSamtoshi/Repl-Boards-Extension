@@ -1,65 +1,83 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css'
+import * as replit from '@replit/extensions';
 
-export default function App() {
-  const [connected, setConnected] = React.useState(false);
-  const [error, setError] = React.useState(null);
+function App() {
+  const [isConnected, setIsConnected] = useState(false);
+  const [error, setError] = useState(null);
+  const [rootFiles, setRootFiles] = useState([]);
 
-  const runRef = React.useRef(0);
-  
-  React.useEffect(() => {
-    // this prevents the effect from running multiple times
-    runRef.current += 1;
-    if (runRef.current === 1) {
-      return;
+  const replitHandshake = async () => {
+    try {
+      await replit.init({ permissions: [] });
+      setIsConnected(true);
+    } catch (error) {
+      setError(error);
     }
-    
-    const replit = window.replit;
-    (async () => {
-      try {
+  }
 
-        await replit.init({permissions: []});
-        
-        setConnected(true);
+  const createTestDir = async () => {
+    try {
+      await replit.fs.createDir('test');
+    } catch (error) {
+      setError(error);
+    }
+  }
 
-        
-        // some example replit API calls. comment these out to try them
+  const readRootDir = async () => {
+    try {
+      const { children } = await replit.fs.readDir('.');
+      return children;
+    } catch (error) {
+      setError(error);
+    }
+  }
 
-        // filesystem
-        // console.log(await replit.readDir('.'))
-        // console.log(await replit.readFile('.replit'))
-        // await replit.createDir('testdir')
-        // await replit.writeFile('testdir/testfile', 'example content')
+  const createTestFile = async () => {
+    try {
+      await replit.fs.writeFile('test-file.txt', 'example content');
+    } catch (error) {
+      setError(error);
+    }
+  }
 
-        // repldb
-        
-        // await replit.replDb.set({key: 'test', value: 123});
-        // console.log(await replit.replDb.get({key: 'test'}));
-        // console.log(await replit.replDb.list({prefix: ''}));
-
-        // graphql (beware that this provides full access to the graph. will be nerfed in the future)
-        
-        // console.log(await replit.queryGraphql({query: 'query { currentUser {id} } '}))
-        // console.log(await replit.mutateGraphql({mutation: `mutation { markAllNotificationsAsSeen {id}}`}))
-
-        // eval (this will be removed for sure lol)
-        // console.log(await replit.evalCode({code: 'return 1+1'}))
-        
-      } catch (e) {
-        console.log(e);
-        setError(e);
-      }
-    })()
+  useEffect(() => {
+    replitHandshake();
   }, []);
-  
+
   return (
     <main>
-      <div>Example extension</div>
-      {error ? (
-        <div>error: {error.message ?? error}</div>
-      ) : (
-        <div>{connected ? 'connected' : 'connecting...'}</div>
-      )}
+      <div>
+        <div>
+          <div className="heading">React Replit Extension Starter</div>
+          {error ? (
+            <>
+              <div className="error">Error: {error.message ?? error}</div>
+              {error.message === "timeout" && (
+                <div>Note: Make sure to open this URL as an Extension, not a Webview</div>
+              )}
+            </>
+          ) : (
+            <div>{isConnected ?
+              <>
+                <button className="command-button" onClick={async () =>
+                  await createTestDir()}>mkdir test</button>
+                <button className="command-button" onClick={async () =>
+                  await createTestFile()}>touch ./test-file.txt</button>
+                <button className="command-button" onClick={async () => {
+                  setRootFiles(await readRootDir())
+                }}>ls -a</button>
+                <ul>
+                  {rootFiles && rootFiles.map((file, index) => (
+                    <li key={index}>{file.filename}</li>
+                  ))}
+                </ul>
+              </> : 'Connecting...'}</div>
+          )}
+        </div>
+      </div>
     </main>
   );
 }
+
+export default App;
